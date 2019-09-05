@@ -2,7 +2,7 @@
 # setup the environment for performing port scans via the tor onion network or open proxies
 
 install_service() {
-#give a service name as arg, install it if not present.
+# give a service name as arg, install it if not present.
 
 	service="$1" 	 # service name argument
 	path=$(which $1) # get path
