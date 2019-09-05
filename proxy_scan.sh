@@ -1,5 +1,4 @@
 #!/bin/bash
-# setup the environment for performing port scans via the tor onion network or open proxies
 
 install_service() {
 # give a service name as arg, install it if not present.
