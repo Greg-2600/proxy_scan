@@ -22,7 +22,10 @@ install_service() {
 
 get_proxies() {
 # site scrape two sites containing lists
-# of proxies, parse and return the IP and port 
+# of proxies, parse and return the IP and port
+
+# after some testing, it looks like the proxy sites 
+# in the get_proxies() function might not work
 
 	# assign urls to variables
 	free_url='https://free-proxy-list.net/'
@@ -106,9 +109,5 @@ main() {
 	config_proxychains 
 }
 
-
-# after some testing, it looks like the proxy sites 
-# in the get_proxies() function might not work
-#get_proxies
 
 main
