@@ -84,16 +84,32 @@ config_tor() {
 }
 
 
+check_tor() {
+# check if tor is in the process stack, configure and start if not
+
+	proc=$(ps aux|grep torrc|grep -v grep)
+	# if tor is not running configure and start it
+	if [ -z "$proc" ]; then
+		echo "tor is not running"
+		config_tor
+	fi
+}
+
+
 check_root() {
+# check if user running this is root 
+# if not give instructions and exit
 	if ((${EUID:-0} || "$(id -u)")); then
-		echo "This script must be run as root" 
-		echo "sudo $0"
+		echo "This script must be run as root: ./sudo $0" 
 		exit 1
 	fi
 }
 
 
 main() {
+# flow control
+
+	# proxychains config, tor config, and apt require uid0
 	check_root
 
 	# list of required software
@@ -104,6 +120,9 @@ main() {
 	for service in $services; do
 		install_service $service
 	done
+
+	# start tor if not running
+	check_tor
 
 	# configure proxy chains
 	config_proxychains 
