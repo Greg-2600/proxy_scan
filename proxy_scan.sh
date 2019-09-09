@@ -59,6 +59,7 @@ config_proxychains() {
 	#echo "random_chain" 		 >> ${this_conf} # proxy selection
 	#echo "chain_len=3"              >> ${this_conf} # proxy chain len
 
+	echo "static_chain" 		 >> ${this_conf} # proxy selection
 	echo "proxy_dns"		 >> ${this_conf} # send DNS via proxy
 	echo "tcp_read_time_out 15000"   >> ${this_conf} # session w/o data timeout
 	echo "tcp_connect_time_out 8000" >> ${this_conf} # connection attempt timeout 
