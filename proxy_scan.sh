@@ -4,16 +4,16 @@ install_service() {
 # give a service name as arg, install it if not present.
 
 	service="$1" 	 # service name argument
-	path=$(which $1) # get path
+	path="$(which "$1")" # get path
 
-	if [ -z $path ]; then
+	if [ -z "$path" ]; then
 
 		# if not in path try to install
-		apt install -y $service
+		apt install -y "$service"
 
 		# if the service being installed is tor configure it
 		# run the configuration function
-		if [ $service = 'tor' ]; then
+		if [ "$service" = 'tor' ]; then
 			config_tor
 		fi
 	fi
@@ -37,7 +37,7 @@ get_proxies() {
 	# iterate through URLs, pull the code into memory
 	# remove everything that isnt an IP and port
 	for url in $urls; do
-		$curl $url|		      # put sites into heap
+		$curl "$url"|		      # put sites into heap
 			sed 's/<tr>/\n/g'|    # put table elements into new lines
 			grep class=\'hm\'|    # throw away everything other than hm class
 			grep anonymous|       # throw away everthing not labeled anon
@@ -119,7 +119,7 @@ main() {
 	# iterate through software list
 	# and install if needed
 	for service in $services; do
-		install_service $service
+		install_service "$service"
 	done
 
 	# start tor if not running
